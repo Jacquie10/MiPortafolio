@@ -11,21 +11,28 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     await queryInterface.bulkInsert('Usuario', [
+     await queryInterface.bulkInsert('Tecnologia', [
        {
-         nombre: "Jacquie Dueñas",
-         username: "jacquie22",
-         password : "i love you",
+         nombre: "Java",
          createdAt: new Date(),
          updatedAt : new Date() 
        },
        {
-        nombre: "Jose Esteban",
-        username: "esteban22",
-        password : "te amo Melani",
+        nombre: "HTTP",
+        createdAt: new Date(),
+        updatedAt : new Date() 
+       },
+       {
+        nombre: "JavaScript",
+        createdAt: new Date(),
+        updatedAt : new Date() 
+       },
+       {
+        nombre: "Lenguaje C",
         createdAt: new Date(),
         updatedAt : new Date() 
        }
+
      ])
 
   },
@@ -37,7 +44,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('Usuario', null, {});
+     await queryInterface.bulkDelete('Tecnologia', null, {});
 
   }
 };

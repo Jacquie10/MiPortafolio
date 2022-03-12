@@ -39,14 +39,13 @@ const proyectosHandler = async (req, res) =>{
         console.log("se debe guardar en la bd")
         const data = JSON.parse(req.body)
 
-        await guardarProyecto( data.nombre , data.usuario, data.rating )        
-      
-        
-        
+        await guardarProyecto( data.nombre , data.usuario, data.rating, data.tecnologias )        
+
         res.json({
             msg: ""
           
         })
+        
     }else if(req.method == "PUT"){
         const data = JSON.parse(req.body)
         await modificarProyecto(data)

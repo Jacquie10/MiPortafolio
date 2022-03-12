@@ -6,10 +6,10 @@ const ProyectoModal = (props) => {
     const [txtNombreProyecto, settxtNombreProyecto] = useState("")
     const [txtUsuarioProyecto, settxtUsuarioProyecto] = useState(0)
     const [txtRating, settxtRating] = useState(0)
-
-
+    const [listaidTecnologiasSeleccionadas, setListaidTecnologiasSeleccionadas] = useState([])  
     useEffect( () => {
         if(props.proyecto!= null){
+            //para mostrar en el modal los valores si es para editar
             setIdProyecto(props.proyecto.id)
             settxtNombreProyecto(props.proyecto.nombre)
             settxtUsuarioProyecto(props.proyecto.idusuario)
@@ -30,13 +30,19 @@ const ProyectoModal = (props) => {
         const rating = event.target.value
         settxtRating(rating)
     }
+    const listaTecnologiaOnchange = (event) => {
+        const listaIds = Array.from(event.target.selectedOptions).map((option)=> {
+            return parseInt(option.value)
+        })
 
+        setListaidTecnologiasSeleccionadas(listaIds)
+    }
     const butGuardarOnClick = () =>{
  
         if(props.modo == "edicion"){
-            props.onActualizarProyectoHandler(idProyecto,txtNombreProyecto, txtUsuarioProyecto,txtRating)
+            props.onActualizarProyectoHandler(idProyecto,txtNombreProyecto, txtUsuarioProyecto,txtRating,listaidTecnologiasSeleccionadas)
         }else{
-            props.onGuardarProyecto(txtNombreProyecto, txtUsuarioProyecto,txtRating)
+            props.onGuardarProyecto(txtNombreProyecto, txtUsuarioProyecto,txtRating,listaidTecnologiasSeleccionadas)
 
         }
         
@@ -68,7 +74,8 @@ const ProyectoModal = (props) => {
 
                     <div className="mb-3">
                         <label htmlFor="usuario" className="form-label">Usuario</label>
-                        <select className="form-select" defaultValue={txtUsuarioProyecto} onChange={txtUsuarioOnchange} >
+                        <select className="form-select" defaultValue={txtUsuarioProyecto} 
+                                                        onChange={txtUsuarioOnchange} >
                             <option value={0}> -----Seleccione una opcion -----</option>
                             {
                                 props.usuarios.map( (usuario) => {
@@ -86,6 +93,21 @@ const ProyectoModal = (props) => {
                         <label htmlFor="puntaje" className="form-label">Puntaje</label>
                         <input type="number" className="form-control"
                             onChange={txtRatingOnchange}  id="puntaje" defaultValue={txtRating}/>
+                    </div>
+
+                    <div>        
+                        <label htmlFor="tecnologias" className="form-label">Tecnologias</label>
+                        <select className="form-select" multiple 
+                                defaultValue={listaidTecnologiasSeleccionadas}
+                                onChange={listaTecnologiaOnchange} >
+                            {
+                                props.tecnologias.map( (tecnologia) => {
+                                    return <option value={tecnologia.id} key={tecnologia.id} >
+                                        {tecnologia.nombre}
+                                    </option>
+                                } )
+                            }
+                        </select>    
                     </div>
                    
                 </form>

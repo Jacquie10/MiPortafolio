@@ -16,6 +16,9 @@ export default function Mainpage() {
     const [listadoProyectos, setListadoProyectos] = useState([])
     const [proyecto, setProyecto] = useState(null)
 
+    const [listadoTecnologias, setListadoTecnologias] = useState([])
+
+
     const obtenerProyectoHTTP = async () => {
         let response = await fetch("/api/proyectos")
         const data = await response.json()
@@ -26,14 +29,21 @@ export default function Mainpage() {
         const data = await response.json()
         return data
     }
+    const obtenerTecnologiasHTTP = async () => {
+        let response = await fetch("/api/tecnologias")
+        const data = await response.json()
+        return data
+    }
     
     useEffect( async () => {
         //hacemos una peticion al backend
         const data = await obtenerProyectoHTTP()
         const dataUsarios = await obtenerUsuariosHTTP()
+        const dataTecnologia = await obtenerTecnologiasHTTP()
 
         setListadoProyectos(data.proyectos)
         setListadoUsuarios(dataUsarios.usuarios)
+        setListadoTecnologias(dataTecnologia.tecnologias)
 
     }, [])   
 
@@ -48,12 +58,13 @@ export default function Mainpage() {
         setdebeMostarModal(false)
     }
 
-    const guardarProyectoHandler = async (nombreProyecto, usuarioProyecto, puntajeProyecto) =>  {
+    const guardarProyectoHandler = async (nombreProyecto, usuarioProyecto, puntajeProyecto, tecnologias) =>  {
         
         const proyecto = {
             nombre: nombreProyecto,
             usuario: usuarioProyecto,
-            rating: puntajeProyecto
+            rating: puntajeProyecto,
+            tecnologias:tecnologias
         }
         const resp = await fetch("/api/proyectos", {
             method: "POST",
@@ -68,19 +79,23 @@ export default function Mainpage() {
             setListadoProyectos(dataProyectos.proyectos)
             
         }
+
+
          //setlistadoProyectos(obtenerProyectos())
          //location.reload()  para recargar la pagina
          //setdebeMostarModal(false)
 
     }
 
-    const  actualizarProyectoHandler  =  async  (id , nombreProyecto ,  usuario ,  rating )  =>  {
+    const  actualizarProyectoHandler  =  async  (id , nombreProyecto ,  usuario ,  rating , tecnologias)  =>  {
         
         const  proyecto  =  {
             id : id ,
             nombre : nombreProyecto ,
             usuario : usuario ,
-            rating: rating
+            rating: rating,
+            tecnologias:tecnologias
+
         }
 
         // peticion a backend para agregar un nuevo proyecto
@@ -153,6 +168,7 @@ export default function Mainpage() {
                             onGuardarProyecto={guardarProyectoHandler }
                             onActualizarProyectoHandler = {actualizarProyectoHandler}
                            proyecto = {proyecto} usuarios ={listaUsuarios}
+                           tecnologias= {listadoTecnologias}
                             />
          
       </div>

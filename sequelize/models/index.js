@@ -29,9 +29,13 @@ fs
 
 const model = require("../models/proyecto")
 const modelUsuario = require("../models/usuario")
+const modelTecnologia = require("../models/tecnologia")
+const modelProyectoXTecnologia = require("../models/proyectoxtecnologia")
 
 db[model(sequelize, Sequelize.DataTypes).name] = model(sequelize, Sequelize.DataTypes);
 db[modelUsuario(sequelize, Sequelize.DataTypes).name] = modelUsuario(sequelize, Sequelize.DataTypes);
+db[modelTecnologia(sequelize, Sequelize.DataTypes).name] = modelTecnologia(sequelize, Sequelize.DataTypes);
+db[modelProyectoXTecnologia(sequelize, Sequelize.DataTypes).name] = modelProyectoXTecnologia(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
