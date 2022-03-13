@@ -1,5 +1,4 @@
-import Head from "next/head";
-import { Button } from "react-bootstrap";
+
 import { useEffect, useState } from "react";
 
 import Barra from "../componentes/Barra.componentes";
@@ -141,21 +140,20 @@ export default function Mainpage() {
 
 
     return <div >
-      <Head>
+      <header>
           <title>Jose</title>
           <meta name="descripcion" content="Te quiero mucho" />
-          <link rel="icon" href="/favicon.ico" />
-          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossOrigin="anonymous"/>    
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossOrigin="anonymous"></script>
+ 
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   
-  
-      </Head>
+      </header>
       <div className="container mt-4">
            <h1>Portafolio</h1>
            <div >
-               <Button className="mt-4" variant="primary" onClick={abrirProyectos}>
+               <button className="mt-4" variant="primary" onClick={abrirProyectos}>
                     Nuevo
-                </Button>
+                </button>
            </div>
            <Barra/>
            <Proyectos proyectos = {listadoProyectos} usuarios={listaUsuarios} modo = {"crud"}  
